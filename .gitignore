@@ -1,0 +1,7 @@
+DesafioExpress/node_modules/
+DesafioApiRest/node_modules
+/node_modules/
+node_modules/
+/node_modules
+/DesafioTemplates/Api_Handlbars/node_modules
+package-lock.json

@@ -15,17 +15,23 @@
   <body class="container">
     <div id="newProduct">
       <form onsubmit="return addProduct()" class="row- g-1">
-        <label for="title" class="label-form">Producto</label>
-        <input type="text" name="title" id="title" class="form-control" />
-        <label for="price" class="label-form">Precio</label>
-        <input type="number" name="price" id="price" class="form-control" />
-        <label for="thumbnail" class="label-form">Imagen</label>
+        <label for="nombre" class="label-form">Producto</label>
+        <input type="text" name="nombre" id="nombre" class="form-control" />
+        <label for="descripcion" class="label-form">Descripcion</label>
         <input
           type="text"
-          name="thumbnail"
-          id="thumbnail"
+          name="descripcion"
+          id="descripcion"
           class="form-control"
         />
+        <label for="precio" class="label-form">Precio</label>
+        <input type="number" name="precio" id="precio" class="form-control" />
+        <label for="stock" class="label-form">Stock</label>
+        <input type="number" name="stock" id="stock" class="form-control" />
+        <label for="codigo" class="label-form">Codigo</label>
+        <input type="number" name="codigo" id="codigo" class="form-control" />
+        <label for="foto" class="label-form">Imagen</label>
+        <input type="text" name="foto" id="foto" class="form-control" />
         <input type="submit" value="Agregar" class="btn btn-primary" />
       </form>
     </div>
@@ -34,7 +40,10 @@
         <thead>
           <tr>
             <th>Producto</th>
+            <th>Descripcion</th>
+            <th>Codigo</th>
             <th>Precio</th>
+            <th>Stock</th>
             <th>Imagen</th>
           </tr>
         </thead>
@@ -47,8 +56,8 @@
         <input
           type="text"
           placeholder="Nombre..."
-          name="nombre"
-          id="nombre"
+          name="name"
+          id="name"
           class="form-control"
         />
         <input

@@ -13,7 +13,7 @@ const render = (data) => {
   let html = data
     .map((x) => {
       //cambiar tipos y colores
-      return `<p> <strong style="color: ">${x.nombre}: </strong>[${x.fecha}]  ${x.mensaje} </p>`;
+      return `<p> <strong style="color: ">${x.nombre}: </strong>[${x.created_at}]  ${x.mensaje} </p>`;
     })
     .join(" ");
 
@@ -22,8 +22,7 @@ const render = (data) => {
 
 const addInfo = () => {
   let dataobj = {
-    nombre: document.querySelector("#nombre").value,
-    //fecha: now,
+    nombre: document.querySelector("#name").value,
     mensaje: document.querySelector("#mensaje").value,
   };
   console.log(dataobj);
@@ -37,12 +36,15 @@ const renderTable = (data) => {
     .map((x) => {
       return `
         <tr>
-          <td>${x.title}</td>
-          <td>${x.price}</td>
+          <td>${x.nombre}</td>
+          <td>${x.descripcion}</td>
+          <td>${x.codigo}</td>
+          <td>${x.precio}</td>
+          <td>${x.stock}</td>
           <td>
             <img
-              src="${x.Thumbnail}"
-              alt="${x.Thumbnail}"
+              src="${x.foto}"
+              alt="${x.foto}"
               class="img-thumbnail"
             />
           </td>
@@ -54,12 +56,16 @@ const renderTable = (data) => {
 
 const addProduct = () => {
   let dataobj = {
-    title: document.querySelector("#title").value,
-    price: document.querySelector("#price").value,
-    Thumbnail: document.querySelector("#thumbnail").value,
+    nombre: document.querySelector("#nombre").value,
+    precio: document.querySelector("#precio").value,
+    foto: document.querySelector("#foto").value,
+    stock: document.querySelector("#stock").value,
+    codigo: document.querySelector("#codigo").value,
+    descripcion: document.querySelector("#descripcion").value,
   };
+  console.log(dataobj);
 
   socket.emit("newProduct", dataobj);
-  document.querySelector("#mensaje").value = "";
+  //document.querySelector("#mensaje").value = "";
   return false;
 };

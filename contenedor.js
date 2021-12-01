@@ -30,6 +30,33 @@ class Contenedor {
       });
     return data;
   }
+
+  async update(id, obj) {
+    console.log(obj);
+    knex
+      .from("products")
+      .where({ id: id })
+      .update({
+        nombre: obj.nombre,
+        descripcion: obj.descripcion,
+        codigo: obj.codigo,
+        foto: obj.foto,
+        precio: obj.precio,
+        stock: obj.stock,
+      })
+      .then((res) => {
+        console.log(res);
+      });
+  }
+
+  async delete(id) {
+    knex("products")
+      .where({ id: id })
+      .del()
+      .then((res) => {
+        console.log(res);
+      });
+  }
 }
 
 module.exports = Contenedor;

@@ -11,6 +11,9 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
+    <link
+      href="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"
+    />
   </head>
   <body class="container">
     <div id="newProduct">
@@ -55,9 +58,44 @@
       <form onsubmit="return addInfo()" class="row g-1">
         <input
           type="text"
+          placeholder="eMail..."
+          name="email"
+          id="email"
+          class="form-control"
+        />
+        <input
+          type="text"
           placeholder="Nombre..."
           name="name"
           id="name"
+          class="form-control"
+        />
+        <input
+          type="text"
+          placeholder="Apellido..."
+          name="apellido"
+          id="apellido"
+          class="form-control"
+        />
+        <input
+          type="number"
+          placeholder="Edad..."
+          name="edad"
+          id="edad"
+          class="form-control"
+        />
+        <input
+          type="text"
+          placeholder="Alias..."
+          name="alias"
+          id="alias"
+          class="form-control"
+        />
+        <input
+          type="text"
+          placeholder="Avatar..."
+          name="avatar"
+          id="avatar"
           class="form-control"
         />
         <input
@@ -72,6 +110,7 @@
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
     <script src="./index.js"></script>
   </body>
 </html>

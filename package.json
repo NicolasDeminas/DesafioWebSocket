@@ -11,9 +11,12 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "faker": "^5.5.3",
     "knex": "^0.95.14",
     "moment": "^2.29.1",
+    "mongoose": "^6.1.2",
     "mysql": "^2.18.1",
+    "normalizr": "^3.6.1",
     "socket.io": "^4.3.1"
   },
   "devDependencies": {

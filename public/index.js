@@ -1,4 +1,5 @@
 const socket = io();
+const normalize = normalizr;
 
 socket.on("message_back", (data) => {
   render(data);
@@ -9,11 +10,25 @@ socket.on("infoProductos", (data) => {
   renderTable(data);
 });
 
+//Normalize
+const authorSchema = new normalize.schema.Entity("author");
+
+const messageSchema = new normalize.schema.Entity(
+  "message",
+  {
+    author: authorSchema,
+  },
+  { idAttribute: "email" }
+);
+
+//Denormalize
+
 const render = (data) => {
+  //console.log(data);
   let html = data
     .map((x) => {
       //cambiar tipos y colores
-      return `<p> <strong style="color: ">${x.nombre}: </strong>[${x.created_at}]  ${x.mensaje} </p>`;
+      return `<p> <strong style="color: ">${x.author.alias}: </strong>  ${x.text} </p>`;
     })
     .join(" ");
 
@@ -22,11 +37,19 @@ const render = (data) => {
 
 const addInfo = () => {
   let dataobj = {
-    nombre: document.querySelector("#name").value,
-    mensaje: document.querySelector("#mensaje").value,
+    author: {
+      id: document.querySelector("#email").value,
+      nombre: document.querySelector("#name").value,
+      apellido: document.querySelector("#apellido").value,
+      edad: document.querySelector("#edad").value,
+      alias: document.querySelector("#alias").value,
+      avatar: document.querySelector("#avatar").value,
+    },
+    text: document.querySelector("#mensaje").value,
   };
   console.log(dataobj);
-  socket.emit("data_msn", dataobj);
+  console.log(normalize.normalize(dataobj, messageSchema));
+  //socket.emit("data_msn", dataobj);
   document.querySelector("#mensaje").value = "";
   return false;
 };

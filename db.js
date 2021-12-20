@@ -42,4 +42,32 @@ knex.schema
     console.log(err);
   });
 
-module.exports = knex;
+const mongoose = require("mongoose");
+const { Schema, model } = require("mongoose");
+
+mongoose.connect("mongodb://127.0.0.1:27017/coder");
+
+mongoose.connection.on("open", () => {
+  console.log("Base de datos conectada con exito");
+});
+
+mongoose.connection.on("error", () => {
+  console.log("Error al conectarse a la base de datos");
+});
+
+const messageSchema = new Schema({
+  author: {
+    id: String,
+    nombre: String,
+    apellido: String,
+    edad: Number,
+    alias: String,
+    avatar: String,
+  },
+
+  text: { type: String, required: true },
+});
+
+const messageModel = model("message", messageSchema);
+
+module.exports = { knex, messageModel };

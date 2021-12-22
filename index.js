@@ -7,24 +7,37 @@ const knex = require("./db");
 const Contenedor = require("./contenedor");
 const Mensajes = require("./mensajes");
 const { normalize, denormalize, schema } = require("normalizr");
+const util = require("util");
 
 const io = require("socket.io")(server);
 
 const c = new Contenedor();
 const msn = new Mensajes();
 
+function print(objeto) {
+  console.log(util.inspect(objeto, false, 12, true));
+}
+
 //Normalizr
-const authorSchema = new schema.Entity("author");
+
+const authorSchema = new schema.Entity("author", {}, { idAttribute: "id" });
 
 const messageSchema = new schema.Entity(
-  "message",
-  {
-    author: authorSchema,
-  },
-  { idAttribute: "email" }
+  "text",
+  { author: authorSchema },
+  { idAttribute: "id" }
 );
 
-//Denoramlize
+const messagesSchema = new schema.Entity(
+  "posts",
+  { text: [messageSchema] },
+  { idAttribute: "id" }
+);
+
+function modifyData(data) {
+  const newData = { id: "message", posts: data };
+  return newData;
+}
 
 app.use(express.static(__dirname + "/public"));
 app.use(express.json());
@@ -32,18 +45,22 @@ app.use(express.json());
 io.on("connection", async (socket) => {
   //console.log("Nueva conexion");
 
-  const normalizeMessage = normalize(await msn.getAll(), messageSchema);
-  //console.log(normalizeMessage);
+  const data = await msn.getAll();
 
-  socket.emit("message_back", normalize(await msn.getAll(), messageSchema));
+  const normalizeMessage = normalize(modifyData(data), messagesSchema);
+  const deNormalizeData = denormalize(
+    normalizeMessage.result,
+    messagesSchema,
+    normalizeMessage.entities
+  );
+
+  socket.emit("message_back", normalizeMessage);
 
   socket.on("data_msn", async (data) => {
-    await msn.save(data);
+    let newData = denormalize(data.result, messagesSchema, data.entities);
+    await msn.save(newData.posts);
 
-    io.sockets.emit(
-      "message_back",
-      normalize(await msn.getAll(), messageSchema)
-    );
+    io.sockets.emit("message_back", normalizeMessage);
   });
 
   socket.emit("infoProductos", await c.getAll());

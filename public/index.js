@@ -1,34 +1,64 @@
 const socket = io();
-const normalize = normalizr;
+
+//Normalize
+const authorSchema = new normalizr.schema.Entity(
+  "author",
+  {},
+  { idAttribute: "id" }
+);
+
+const messageSchema = new normalizr.schema.Entity(
+  "text",
+  {
+    author: authorSchema,
+  },
+  { idAttribute: "id" }
+);
+
+const messagesSchema = new normalizr.schema.Entity(
+  "posts",
+  { mensaje: [messageSchema] },
+  { idAttribute: "id" }
+);
+
+function modifyData(data) {
+  const newData = { id: "message", posts: data };
+  return newData;
+}
 
 socket.on("message_back", (data) => {
-  render(data);
-  socket.emit("message_from_client", "Soy el Front");
+  const newData = normalizr.denormalize(
+    data.result,
+    messageSchema,
+    data.entities
+  );
+
+  let html = data.entities.posts.message.posts
+    .map((x) => {
+      //cambiar tipos y colores
+      return `<p> <strong style="color: ">${x.author.alias}: </strong>  ${x.text} </p>`;
+    })
+    .join(" ");
+
+  document.querySelector("#mensajes").innerHTML = html;
+
+  //socket.emit("message_from_client", "Soy el Front");
 });
 
 socket.on("infoProductos", (data) => {
   renderTable(data);
 });
 
-//Normalize
-const authorSchema = new normalize.schema.Entity("author");
-
-const messageSchema = new normalize.schema.Entity(
-  "message",
-  {
-    author: authorSchema,
-  },
-  { idAttribute: "email" }
-);
-
-//Denormalize
-
 const render = (data) => {
-  //console.log(data);
-  let html = data
+  const newData = normalizr.denormalize(data, messageSchema, data.entities);
+
+  console.log(newData);
+  let html = newData
     .map((x) => {
+      // console.log(x.length);
+      console.log(x.undefined.author.alias);
       //cambiar tipos y colores
-      return `<p> <strong style="color: ">${x.author.alias}: </strong>  ${x.text} </p>`;
+      // return `<p> <strong style="color: ">${x.author.alias}: </strong>  ${x.text} </p>`;
     })
     .join(" ");
 
@@ -47,9 +77,9 @@ const addInfo = () => {
     },
     text: document.querySelector("#mensaje").value,
   };
-  console.log(dataobj);
-  console.log(normalize.normalize(dataobj, messageSchema));
-  //socket.emit("data_msn", dataobj);
+
+  let data = modifyData(dataobj);
+  socket.emit("data_msn", normalizr.normalize(data, messagesSchema));
   document.querySelector("#mensaje").value = "";
   return false;
 };

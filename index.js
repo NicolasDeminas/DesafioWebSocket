@@ -8,6 +8,8 @@ const Contenedor = require("./contenedor");
 const Mensajes = require("./mensajes");
 const { normalize, denormalize, schema } = require("normalizr");
 const util = require("util");
+const session = require("express-session");
+const mongoStore = require("connect-mongo");
 
 const io = require("socket.io")(server);
 
@@ -41,10 +43,31 @@ function modifyData(data) {
 
 app.use(express.static(__dirname + "/public"));
 app.use(express.json());
+app.use(express.urlencoded());
+
+app.use(
+  session({
+    store: mongoStore.create({
+      mongoUrl:
+        "mongodb+srv://Nico:SnZtUcHWXy8KRj8Y@ecommerceatlas.zbptj.mongodb.net/coder_ecommerce?retryWrites=true&w=majority",
+    }),
+    secret: "misecreto",
+    saveUninitialized: true,
+    resave: true,
+  })
+);
+
+let authorized;
+
+function authorize(req, res, next) {
+  if (req.session.user == "Nico") {
+    authorized = true;
+    next;
+  }
+  res.redirect("/login");
+}
 
 io.on("connection", async (socket) => {
-  //console.log("Nueva conexion");
-
   const data = await msn.getAll();
 
   const normalizeMessage = normalize(modifyData(data), messagesSchema);
@@ -70,6 +93,21 @@ io.on("connection", async (socket) => {
     console.log(`data guardada`);
     io.sockets.emit("infoProductos", await c.getAll());
   });
+});
+
+app.get("/login", (req, res) => {
+  res.sendFile(`${__dirname}/public/login.html`);
+});
+
+app.post("/login", (req, res) => {
+  const user = req.body;
+  if (user.username == "Nico") {
+    console.log(user.username);
+    req.session.user = user.username;
+    res.redirect("/");
+    return;
+  }
+  res.redirect("/login");
 });
 
 app.put("/updateProduct/:id", async (req, res) => {

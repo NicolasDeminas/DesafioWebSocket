@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "connect-mongo": "^4.6.0",
     "express": "^4.17.1",
+    "express-session": "^1.17.2",
     "faker": "^5.5.3",
     "knex": "^0.95.14",
     "moment": "^2.29.1",

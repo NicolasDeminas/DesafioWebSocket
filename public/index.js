@@ -122,3 +122,8 @@ const addProduct = () => {
   //document.querySelector("#mensaje").value = "";
   return false;
 };
+
+const logout = () => {
+  console.log("hola mundo");
+  return false;
+};

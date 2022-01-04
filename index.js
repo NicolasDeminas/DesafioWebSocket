@@ -41,7 +41,6 @@ function modifyData(data) {
   return newData;
 }
 
-app.use(express.static(__dirname + "/public"));
 app.use(express.json());
 app.use(express.urlencoded());
 
@@ -57,15 +56,9 @@ app.use(
   })
 );
 
-let authorized;
-
-function authorize(req, res, next) {
-  if (req.session.user == "Nico") {
-    authorized = true;
-    next;
-  }
-  res.redirect("/login");
-}
+app.get("/", (req, res) => {
+  res.redirect("/home");
+});
 
 io.on("connection", async (socket) => {
   const data = await msn.getAll();
@@ -95,19 +88,36 @@ io.on("connection", async (socket) => {
   });
 });
 
+app.get("/home", (req, res) => {
+  const nombre = req.session?.username;
+  if (!nombre) {
+    return res.redirect("/login");
+  }
+  res.sendFile(`${__dirname}/public/index.html`);
+});
+
 app.get("/login", (req, res) => {
+  const nombre = req.session?.username;
+  if (nombre) {
+    return res.redirect("/");
+  }
   res.sendFile(`${__dirname}/public/login.html`);
 });
 
 app.post("/login", (req, res) => {
-  const user = req.body;
-  if (user.username == "Nico") {
-    console.log(user.username);
-    req.session.user = user.username;
-    res.redirect("/");
-    return;
+  req.session.username = req.body.username;
+  res.redirect("/home");
+});
+
+app.get("/logout", (req, res) => {
+  const nombre = req.session?.username;
+  if (nombre) {
+    req.session.destroy((err) => {
+      if (!err) {
+        return res.sendFile(`${__dirname}/public/logout.html`);
+      }
+    });
   }
-  res.redirect("/login");
 });
 
 app.put("/updateProduct/:id", async (req, res) => {
@@ -123,6 +133,8 @@ app.delete("/deleteProduct/:id", async (req, res) => {
 app.get("/api/productos-test", async (req, res) => {
   res.send(await c.getFakerProducts());
 });
+
+app.use(express.static(__dirname + "/public/"));
 
 server.listen(port, () => {
   console.log(`Server run on port ${port}`);

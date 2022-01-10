@@ -10,6 +10,11 @@ const { normalize, denormalize, schema } = require("normalizr");
 const util = require("util");
 const session = require("express-session");
 const mongoStore = require("connect-mongo");
+const passport = require("passport");
+const bcrypt = require("bcrypt");
+const LocalStrategy = require("passport-local").Strategy;
+const { userModel } = require("./db");
+const { createHash } = require("crypto");
 
 const io = require("socket.io")(server);
 
@@ -56,6 +61,82 @@ app.use(
   })
 );
 
+const authorize = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    next();
+    return;
+  }
+  res.redirect("/login");
+};
+
+//PASSPORT
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(
+  "local-login",
+  new LocalStrategy((username, password, done) => {
+    userModel.findOne({ username: username }, (err, user) => {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        console.log(`User not found`);
+        return done(null, false);
+      }
+      if (!isValidPassword(user, password)) {
+        console.log(`Invalid password`);
+        return done(null, false);
+      }
+      return done(null, user);
+    });
+  })
+);
+
+passport.use(
+  "local-signup",
+  new LocalStrategy(
+    {
+      passReqToCallback: true,
+    },
+    (req, username, password, done) => {
+      userModel.findOne({ username: username }, (err, user) => {
+        if (err) {
+          console.log(`Error in signup ${err}`);
+        }
+        if (user) {
+          console.log(`User already exists`);
+          return done(null, false);
+        }
+        const newUser = {
+          username: username,
+          password: bcrypt.hashSync(password, 10),
+        };
+
+        userModel.create(newUser, (err, user) => {
+          if (err) {
+            console.log(`Error in saving user: ${err}`);
+            return done(err);
+          }
+          return done(null, user);
+        });
+      });
+    }
+  )
+);
+
+passport.serializeUser((user, done) => {
+  done(null, user._id);
+});
+
+passport.deserializeUser((id, done) => {
+  userModel.findById(id, done);
+});
+
+function isValidPassword(user, password) {
+  return bcrypt.compareSync(password, user.password);
+}
+
 app.get("/", (req, res) => {
   res.redirect("/home");
 });
@@ -88,36 +169,41 @@ io.on("connection", async (socket) => {
   });
 });
 
-app.get("/home", (req, res) => {
-  const nombre = req.session?.username;
-  if (!nombre) {
-    return res.redirect("/login");
-  }
+app.get("/home", authorize, (req, res) => {
   res.sendFile(`${__dirname}/public/index.html`);
 });
 
 app.get("/login", (req, res) => {
-  const nombre = req.session?.username;
-  if (nombre) {
-    return res.redirect("/");
-  }
   res.sendFile(`${__dirname}/public/login.html`);
 });
 
-app.post("/login", (req, res) => {
-  req.session.username = req.body.username;
-  res.redirect("/home");
+app.get("/signup", (req, res) => {
+  res.sendFile(`${__dirname}/public/signup.html`);
 });
 
+app.get("/getUsers", (req, res) => {
+  res.send(user);
+});
+
+app.post(
+  "/signup",
+  passport.authenticate("local-signup", {
+    successRedirect: "/login",
+    failureRedirect: "/signup",
+  })
+);
+
+app.post(
+  "/login",
+  passport.authenticate("local-login", {
+    successRedirect: "/home",
+    failureRedirect: "/login",
+  })
+);
+
 app.get("/logout", (req, res) => {
-  const nombre = req.session?.username;
-  if (nombre) {
-    req.session.destroy((err) => {
-      if (!err) {
-        return res.sendFile(`${__dirname}/public/logout.html`);
-      }
-    });
-  }
+  req.logOut();
+  res.redirect("/login");
 });
 
 app.put("/updateProduct/:id", async (req, res) => {

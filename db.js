@@ -45,7 +45,9 @@ knex.schema
 const mongoose = require("mongoose");
 const { Schema, model } = require("mongoose");
 
-mongoose.connect("mongodb://127.0.0.1:27017/coder");
+mongoose.connect(
+  "mongodb+srv://Nico:SnZtUcHWXy8KRj8Y@ecommerceatlas.zbptj.mongodb.net/coder_ecommerce?retryWrites=true&w=majority"
+);
 
 mongoose.connection.on("open", () => {
   console.log("Base de datos conectada con exito");
@@ -70,4 +72,17 @@ const messageSchema = new Schema({
 
 const messageModel = model("message", messageSchema);
 
-module.exports = { knex, messageModel };
+const userSchema = new Schema({
+  username: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+});
+
+const userModel = model("user", userSchema);
+
+module.exports = { knex, messageModel, userModel };

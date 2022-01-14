@@ -1,11 +1,13 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 8080;
+
+const parseArg = require("minimist");
 const http = require("http");
 const server = http.createServer(app);
 const knex = require("./db");
 const Contenedor = require("./contenedor");
 const Mensajes = require("./mensajes");
+const random = require("./routes/randoms");
 const { normalize, denormalize, schema } = require("normalizr");
 const util = require("util");
 const session = require("express-session");
@@ -14,6 +16,7 @@ const passport = require("passport");
 const bcrypt = require("bcrypt");
 const LocalStrategy = require("passport-local").Strategy;
 const { userModel } = require("./db");
+const dotenv = require("dotenv");
 const { createHash } = require("crypto");
 
 const io = require("socket.io")(server);
@@ -24,6 +27,15 @@ const msn = new Mensajes();
 function print(objeto) {
   console.log(util.inspect(objeto, false, 12, true));
 }
+
+dotenv.config();
+
+const options = {
+  default: { port: 8080 },
+  alias: { p: "port" },
+};
+
+let arguments = parseArg(process.argv.slice(2), options);
 
 //Normalizr
 
@@ -52,14 +64,15 @@ app.use(express.urlencoded());
 app.use(
   session({
     store: mongoStore.create({
-      mongoUrl:
-        "mongodb+srv://Nico:SnZtUcHWXy8KRj8Y@ecommerceatlas.zbptj.mongodb.net/coder_ecommerce?retryWrites=true&w=majority",
+      mongoUrl: process.env.MONGO_CONNECT,
     }),
-    secret: "misecreto",
+    secret: process.env.SESSION_SECRET,
     saveUninitialized: true,
     resave: true,
   })
 );
+
+app.use("/api/randoms", random);
 
 const authorize = (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -220,8 +233,21 @@ app.get("/api/productos-test", async (req, res) => {
   res.send(await c.getFakerProducts());
 });
 
+app.get("/info", (req, res) => {
+  let data = {
+    "argumentos de entrada": process.argv.slice(2),
+    "sistema opertativo": process.platform,
+    "version de node": process.version,
+    rss: process.memoryUsage().rss,
+    path: process.execPath,
+    processId: process.pid,
+    "carpeta proyecto": process.cwd(),
+  };
+  res.json({ data });
+});
+
 app.use(express.static(__dirname + "/public/"));
 
-server.listen(port, () => {
-  console.log(`Server run on port ${port}`);
+server.listen(arguments.port, () => {
+  console.log(`Server run on port ${arguments.port}`);
 });

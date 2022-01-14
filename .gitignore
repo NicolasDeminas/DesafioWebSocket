@@ -5,3 +5,4 @@ node_modules/
 /node_modules
 /DesafioTemplates/Api_Handlbars/node_modules
 package-lock.json
+.env

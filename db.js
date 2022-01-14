@@ -1,3 +1,7 @@
+const dotenv = require("dotenv");
+
+dotenv.config();
+
 const knex = require("knex")({
   client: "mysql",
   connection: {
@@ -45,9 +49,7 @@ knex.schema
 const mongoose = require("mongoose");
 const { Schema, model } = require("mongoose");
 
-mongoose.connect(
-  "mongodb+srv://Nico:SnZtUcHWXy8KRj8Y@ecommerceatlas.zbptj.mongodb.net/coder_ecommerce?retryWrites=true&w=majority"
-);
+mongoose.connect(process.env.MONGO_CONNECT);
 
 mongoose.connection.on("open", () => {
   console.log("Base de datos conectada con exito");

@@ -1,0 +1,18 @@
+-----FOREVER------------
+Iniciar el servidor en el puerto 8080 modo fork
+forever start index.js
+forever stop *numero pid del proceso*
+
+Servidor en el puerto 8081 modo cluster
+forever start index.js --port=8081 --mode=CLUSTER
+forever stop *numero pid del proceso*
+
+
+------------PM2----------------------
+Iniciar el servidor en el puerto 8080 modo fork
+pm2 start index.js
+
+Iniciar el servidor en modo cluster
+pm2 start -i --watch index.js
+
+

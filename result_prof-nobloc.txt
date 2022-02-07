@@ -1,0 +1,212 @@
+Statistical profiling result from isolate-nobloc.log, (5649 ticks, 0 unaccounted, 0 excluded).
+
+ [Shared libraries]:
+   ticks  total  nonlib   name
+   5097   90.2%          C:\WINDOWS\SYSTEM32\ntdll.dll
+    528    9.3%          C:\Program Files\nodejs\node.exe
+      3    0.1%          C:\WINDOWS\System32\KERNELBASE.dll
+      1    0.0%          C:\WINDOWS\System32\KERNEL32.DLL
+
+ [JavaScript]:
+   ticks  total  nonlib   name
+      3    0.1%   15.0%  LazyCompile: *serializeInto C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\serializer.js:550:23
+      3    0.1%   15.0%  LazyCompile: *resolve path.js:130:10
+      2    0.0%   10.0%  LazyCompile: *writeOrBuffer internal/streams/writable.js:334:23
+      1    0.0%    5.0%  RegExp: ^TLS_
+      1    0.0%    5.0%  RegExp: ^(?:[a-zA-Z]:|[\\/]{2}[^\\/]+[\\/][^\\/]+)?[\\/]*
+      1    0.0%    5.0%  RegExp: [^\t\x20-\x7e\x80-\xff]
+      1    0.0%    5.0%  LazyCompile: *write buffer.js:1042:40
+      1    0.0%    5.0%  LazyCompile: *toString buffer.js:776:46
+      1    0.0%    5.0%  LazyCompile: *readableAddChunk internal/streams/readable.js:231:26
+      1    0.0%    5.0%  LazyCompile: *readInt32LE internal/buffer.js:382:21
+      1    0.0%    5.0%  LazyCompile: *processWaitQueue C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\sdam\topology.js:636:26
+      1    0.0%    5.0%  LazyCompile: *processTicksAndRejections internal/process/task_queues.js:65:35
+      1    0.0%    5.0%  LazyCompile: *nextTick internal/process/task_queues.js:101:18
+      1    0.0%    5.0%  LazyCompile: *next C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\express\lib\router\index.js:176:16
+      1    0.0%    5.0%  LazyCompile: *deserializeObject C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\deserializer.js:65:27
+
+ [C++]:
+   ticks  total  nonlib   name
+
+ [Summary]:
+   ticks  total  nonlib   name
+     20    0.4%  100.0%  JavaScript
+      0    0.0%    0.0%  C++
+     38    0.7%  190.0%  GC
+   5629   99.6%          Shared libraries
+
+ [C++ entry points]:
+   ticks    cpp   total   name
+
+ [Bottom up (heavy) profile]:
+  Note: percentage shows a share of a particular caller in the total
+  amount of its parent calls.
+  Callers occupying less than 1.0% are not shown.
+
+   ticks parent  name
+   5097   90.2%  C:\WINDOWS\SYSTEM32\ntdll.dll
+
+    528    9.3%  C:\Program Files\nodejs\node.exe
+    244   46.2%    C:\Program Files\nodejs\node.exe
+     30   12.3%      LazyCompile: ~wrapSafe internal/modules/cjs/loader.js:964:18
+     25   83.3%        LazyCompile: ~Module._compile internal/modules/cjs/loader.js:1017:37
+     25  100.0%          LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1072:37
+     16   64.0%            LazyCompile: ~Module.load internal/modules/cjs/loader.js:916:33
+      9   36.0%            LazyCompile: *Module._load internal/modules/cjs/loader.js:704:24
+      5   16.7%        LazyCompile: *Module._compile internal/modules/cjs/loader.js:1017:37
+      5  100.0%          LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1072:37
+      5  100.0%            LazyCompile: *Module._load internal/modules/cjs/loader.js:704:24
+     24    9.8%      LazyCompile: ~realpathSync fs.js:1650:22
+     18   75.0%        LazyCompile: ~toRealPath internal/modules/cjs/loader.js:343:20
+     16   88.9%          LazyCompile: ~tryFile internal/modules/cjs/loader.js:334:17
+     15   93.8%            LazyCompile: ~tryExtensions internal/modules/cjs/loader.js:350:23
+      1    6.3%            LazyCompile: ~finalizeEsmResolution internal/modules/cjs/loader.js:886:31
+      2   11.1%          LazyCompile: ~Module._findPath internal/modules/cjs/loader.js:444:28
+      2  100.0%            LazyCompile: *Module._resolveFilename internal/modules/cjs/loader.js:796:35
+      6   25.0%        LazyCompile: *Module._findPath internal/modules/cjs/loader.js:444:28
+      6  100.0%          LazyCompile: ~Module._resolveFilename internal/modules/cjs/loader.js:796:35
+      4   66.7%            LazyCompile: ~Module._load internal/modules/cjs/loader.js:704:24
+      2   33.3%            LazyCompile: *Module._load internal/modules/cjs/loader.js:704:24
+     14    5.7%      LazyCompile: ~stat internal/modules/cjs/loader.js:132:14
+     10   71.4%        LazyCompile: ~tryFile internal/modules/cjs/loader.js:334:17
+     10  100.0%          LazyCompile: ~tryExtensions internal/modules/cjs/loader.js:350:23
+      9   90.0%            LazyCompile: ~Module._findPath internal/modules/cjs/loader.js:444:28
+      1   10.0%            LazyCompile: ~tryPackage internal/modules/cjs/loader.js:288:20
+      4   28.6%        LazyCompile: ~Module._findPath internal/modules/cjs/loader.js:444:28
+      4  100.0%          LazyCompile: ~Module._resolveFilename internal/modules/cjs/loader.js:796:35
+      4  100.0%            LazyCompile: ~Module._load internal/modules/cjs/loader.js:704:24
+      9    3.7%      LazyCompile: ~writevGeneric internal/stream_base_commons.js:118:23
+      9  100.0%        LazyCompile: ~Socket._writeGeneric net.js:759:42
+      9  100.0%          LazyCompile: ~Socket._writev net.js:791:36
+      9  100.0%            LazyCompile: ~doWrite internal/streams/writable.js:367:17
+      9    3.7%      C:\Program Files\nodejs\node.exe
+      1   11.1%        LazyCompile: ~isValid C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\read_preference.js:133:19
+      1  100.0%          LazyCompile: ~isValid C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\read_preference.js:149:12
+      1  100.0%            LazyCompile: ~readPreferenceServerSelector C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\sdam\server_selection.js:188:38
+      1   11.1%        LazyCompile: ~isIPv6 internal/net.js:34:16
+      1  100.0%          LazyCompile: ~isIP internal/net.js:38:14
+      1  100.0%            LazyCompile: ~parseSslOptions C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\cmap\connect.js:211:25
+      1   11.1%        LazyCompile: ~expressInit C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\express\lib\middleware\init.js:29:30
+      1  100.0%          LazyCompile: ~handle C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\express\lib\router\layer.js:86:49
+      1  100.0%            LazyCompile: *next C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\express\lib\router\index.js:176:16
+      1   11.1%        LazyCompile: ~databaseNamespace C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\utils.js:514:27
+      1  100.0%          LazyCompile: ~Msg C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\cmap\commands.js:468:16
+      1  100.0%            LazyCompile: ~command C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\cmap\connection.js:161:12
+      1   11.1%        LazyCompile: ~connectHandler C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\cmap\connect.js:270:28
+      1  100.0%          LazyCompile: ~onceWrapper events.js:416:21
+      1  100.0%            LazyCompile: ~emit events.js:264:44
+      1   11.1%        LazyCompile: ~checkServer C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\sdam\monitor.js:138:21
+      1  100.0%          LazyCompile: ~<anonymous> C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\sdam\monitor.js:222:12
+      1  100.0%            LazyCompile: ~executeAndReschedule C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\utils.js:786:34
+      1   11.1%        LazyCompile: ~MongoCredentials C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\cmap\auth\mongo_credentials.js:30:16
+      1  100.0%          LazyCompile: ~merge C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\cmap\auth\mongo_credentials.js:113:17
+      1  100.0%            LazyCompile: ~transform C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\connection_string.js:429:18
+      1   11.1%        LazyCompile: *serializeInto C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\serializer.js:550:23
+      1  100.0%          LazyCompile: *serializeInto C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\serializer.js:550:23
+      1  100.0%            LazyCompile: ~serialize C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\bson.js:111:19
+      1   11.1%        LazyCompile: *processTicksAndRejections internal/process/task_queues.js:65:35
+      7    2.9%      LazyCompile: ~openSync fs.js:467:18
+      7  100.0%        LazyCompile: ~readFileSync fs.js:374:22
+      7  100.0%          LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1072:37
+      6   85.7%            LazyCompile: ~Module.load internal/modules/cjs/loader.js:916:33
+      1   14.3%            LazyCompile: *Module._load internal/modules/cjs/loader.js:704:24
+      5    2.0%      LazyCompile: ~authenticate C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\passport\lib\middleware\authenticate.js:94:31
+      5  100.0%        LazyCompile: ~handle C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\express\lib\router\layer.js:86:49
+      3   60.0%          LazyCompile: *next C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\express\lib\router\index.js:176:16
+      3  100.0%            LazyCompile: ~initialize C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\passport\lib\middleware\initialize.js:51:29
+      2   40.0%          LazyCompile: ~trim_prefix C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\express\lib\router\index.js:288:23
+      2  100.0%            LazyCompile: ~<anonymous> C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\express\lib\router\index.js:275:64
+      5    2.0%      LazyCompile: *nextTick internal/process/task_queues.js:101:18
+      2   40.0%        LazyCompile: ~onwrite internal/streams/writable.js:394:17
+      2  100.0%          LazyCompile: ~afterWriteDispatched internal/stream_base_commons.js:151:30
+      2  100.0%            LazyCompile: ~writevGeneric internal/stream_base_commons.js:118:23
+      1   20.0%        LazyCompile: ~write_ _http_outgoing.js:678:16
+      1  100.0%          LazyCompile: ~write _http_outgoing.js:660:49
+      1  100.0%            LazyCompile: ~write C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\compression\index.js:78:32
+      1   20.0%        LazyCompile: ~checkOut C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\cmap\connection_pool.js:120:13
+      1  100.0%          LazyCompile: ~withConnection C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\cmap\connection_pool.js:249:19
+      1  100.0%            LazyCompile: ~command C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\sdam\server.js:133:12
+      1   20.0%        LazyCompile: ~checkIn C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\cmap\connection_pool.js:148:12
+      1  100.0%          LazyCompile: ~<anonymous> C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\cmap\connection_pool.js:266:27
+      1  100.0%            LazyCompile: ~handleOperationResult C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\sdam\server.js:322:42
+      5    2.0%      LazyCompile: *deserializeObject C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\deserializer.js:65:27
+      5  100.0%        LazyCompile: *deserializeObject C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\deserializer.js:65:27
+      3   60.0%          LazyCompile: *deserializeObject C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\deserializer.js:65:27
+      3  100.0%            LazyCompile: ~deserialize C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\deserializer.js:36:21
+      2   40.0%          LazyCompile: ~deserialize C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\deserializer.js:36:21
+      2  100.0%            LazyCompile: ~deserialize C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\bson.js:162:21
+      4    1.6%      LazyCompile: ~slice buffer.js:608:12
+      4  100.0%        LazyCompile: *deserializeObject C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\deserializer.js:65:27
+      2   50.0%          LazyCompile: ~deserialize C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\deserializer.js:36:21
+      2  100.0%            LazyCompile: ~deserialize C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\bson.js:162:21
+      2   50.0%          LazyCompile: *deserializeObject C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\deserializer.js:65:27
+      1   50.0%            LazyCompile: ~deserialize C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\deserializer.js:36:21
+      1   50.0%            LazyCompile: *deserializeObject C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\deserializer.js:65:27
+      4    1.6%      LazyCompile: ~deserialize C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\deserializer.js:36:21
+      4  100.0%        LazyCompile: ~deserialize C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\bson.js:162:21
+      2   50.0%          LazyCompile: ~parse C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\cmap\commands.js:577:10
+      2  100.0%            LazyCompile: ~messageHandler C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\cmap\connection.js:421:35
+      2   50.0%          LazyCompile: ~parse C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\cmap\commands.js:384:10
+      2  100.0%            LazyCompile: ~messageHandler C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\cmap\connection.js:421:35
+      4    1.6%      LazyCompile: ~TLSSocket.getPeerCertificate _tls_wrap.js:972:50
+      4  100.0%        LazyCompile: ~onConnectSecure _tls_wrap.js:1483:25
+      2   50.0%          LazyCompile: ~emit events.js:264:44
+      2  100.0%            LazyCompile: ~TLSSocket._finishInit _tls_wrap.js:906:43
+      2   50.0%          LazyCompile: *emit events.js:264:44
+      2  100.0%            LazyCompile: ~TLSSocket._finishInit _tls_wrap.js:906:43
+      4    1.6%      LazyCompile: ~Hmac internal/crypto/hash.js:107:14
+      4  100.0%        LazyCompile: ~createHmac crypto.js:146:20
+      2   50.0%          LazyCompile: ~exports.sign C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\cookie-signature\index.js:16:24
+      2  100.0%            LazyCompile: ~exports.unsign C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\cookie-signature\index.js:36:26
+      2   50.0%          LazyCompile: ~HMAC C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\cmap\auth\scram.js:214:14
+      2  100.0%            LazyCompile: ~continueScramConversation C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\cmap\auth\scram.js:93:35
+      3    1.2%      LazyCompile: ~readSync fs.js:555:18
+      2   66.7%        LazyCompile: ~tryReadSync fs.js:362:21
+      2  100.0%          LazyCompile: ~readFileSync fs.js:374:22
+      2  100.0%            LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1072:37
+      1   33.3%        LazyCompile: *readFileSync fs.js:374:22
+      1  100.0%          LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1072:37
+      1  100.0%            LazyCompile: ~Module.load internal/modules/cjs/loader.js:916:33
+      3    1.2%      LazyCompile: ~hash C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\express-session\index.js:596:14
+      2   66.7%        LazyCompile: ~inflate C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\express-session\index.js:371:22
+      2  100.0%          LazyCompile: ~<anonymous> C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\express-session\index.js:485:38
+      2  100.0%            LazyCompile: ~<anonymous> C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\connect-mongo\build\main\lib\MongoStore.js:203:10
+      1   33.3%        LazyCompile: ~isSaved C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\express-session\index.js:430:21
+      1  100.0%          LazyCompile: ~shouldSave C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\express-session\index.js:440:24
+      1  100.0%            LazyCompile: ~end C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\express-session\index.js:250:27
+      3    1.2%      LazyCompile: ~handleWriteReq internal/stream_base_commons.js:47:24
+      3  100.0%        LazyCompile: ~writeGeneric internal/stream_base_commons.js:143:22
+      3  100.0%          LazyCompile: ~Socket._writeGeneric net.js:759:42
+      3  100.0%            LazyCompile: ~Socket._write net.js:796:35
+      3    1.2%      LazyCompile: ~compileForInternalLoader internal/bootstrap/loaders.js:270:27
+      2   66.7%        LazyCompile: ~nativeModuleRequire internal/bootstrap/loaders.js:303:29
+      1   50.0%          LazyCompile: ~setupPrepareStackTrace internal/bootstrap/node.js:252:32
+      1  100.0%            Eval: ~<anonymous> internal/bootstrap/node.js:1:1
+      1   50.0%          Eval: ~<anonymous> internal/child_process.js:1:1
+      1  100.0%            LazyCompile: ~compileForInternalLoader internal/bootstrap/loaders.js:270:27
+      1   33.3%        LazyCompile: ~compileForPublicLoader internal/bootstrap/loaders.js:219:25
+      1  100.0%          LazyCompile: ~loadNativeModule internal/modules/cjs/helpers.js:31:26
+      1  100.0%            LazyCompile: ~Module._load internal/modules/cjs/loader.js:704:24
+      3    1.2%      LazyCompile: ~Hash internal/crypto/hash.js:37:14
+      3  100.0%        LazyCompile: ~createHash crypto.js:114:20
+      1   33.3%          LazyCompile: ~sha1 C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\cookie-signature\index.js:49:14
+      1  100.0%            LazyCompile: ~exports.unsign C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\cookie-signature\index.js:36:26
+      1   33.3%          LazyCompile: ~hash C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\express-session\index.js:596:14
+      1  100.0%            LazyCompile: ~isSaved C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\express-session\index.js:430:21
+      1   33.3%          LazyCompile: ~entitytag C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\etag\index.js:39:20
+      1  100.0%            LazyCompile: ~etag C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\etag\index.js:70:15
+      3    1.2%      LazyCompile: *processTicksAndRejections internal/process/task_queues.js:65:35
+      6    1.1%    LazyCompile: ~deserializeObject C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\deserializer.js:65:27
+      3   50.0%      LazyCompile: ~deserializeObject C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\deserializer.js:65:27
+      2   66.7%        LazyCompile: ~deserialize C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\deserializer.js:36:21
+      2  100.0%          LazyCompile: ~deserialize C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\bson.js:162:21
+      1   50.0%            LazyCompile: ~parse C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\cmap\commands.js:577:10
+      1   50.0%            LazyCompile: ~parse C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\cmap\commands.js:384:10
+      1   33.3%        LazyCompile: ~deserializeObject C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\deserializer.js:65:27
+      1  100.0%          LazyCompile: ~deserialize C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\deserializer.js:36:21
+      1  100.0%            LazyCompile: ~deserialize C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\bson.js:162:21
+      3   50.0%      LazyCompile: ~deserialize C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\deserializer.js:36:21
+      3  100.0%        LazyCompile: ~deserialize C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\bson.js:162:21
+      3  100.0%          LazyCompile: ~parse C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\cmap\commands.js:577:10
+      3  100.0%            LazyCompile: ~messageHandler C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\cmap\connection.js:421:35
+

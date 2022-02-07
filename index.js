@@ -1,4 +1,5 @@
 const express = require("express");
+const compression = require('compression')
 const app = express();
 const parseArg = require("minimist");
 const cluster = require("cluster");
@@ -37,6 +38,7 @@ if (clusterMode && cluster.isMaster) {
   const { userModel } = require("./db");
   const dotenv = require("dotenv");
   const { createHash } = require("crypto");
+  const {infoLogger, warningLogger, errorLogger} = require('./logger')
 
   const io = require("socket.io")(server);
 
@@ -72,6 +74,8 @@ if (clusterMode && cluster.isMaster) {
 
   app.use(express.json());
   app.use(express.urlencoded());
+
+  app.use(compression())
 
   app.use(
     session({

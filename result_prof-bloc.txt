@@ -1,0 +1,175 @@
+Statistical profiling result from isolate-bloc.log, (6487 ticks, 0 unaccounted, 0 excluded).
+
+ [Shared libraries]:
+   ticks  total  nonlib   name
+   6223   95.9%          C:\WINDOWS\SYSTEM32\ntdll.dll
+    255    3.9%          C:\Program Files\nodejs\node.exe
+      1    0.0%          C:\WINDOWS\System32\KERNELBASE.dll
+
+ [JavaScript]:
+   ticks  total  nonlib   name
+      4    0.1%   50.0%  LazyCompile: *resolve path.js:130:10
+      1    0.0%   12.5%  RegExp: (?:^|\/)\.?\.$
+      1    0.0%   12.5%  LazyCompile: *toNamespacedPath path.js:549:19
+      1    0.0%   12.5%  LazyCompile: *normalizeString path.js:52:25
+      1    0.0%   12.5%  LazyCompile: *Module.require internal/modules/cjs/loader.js:944:36
+
+ [C++]:
+   ticks  total  nonlib   name
+
+ [Summary]:
+   ticks  total  nonlib   name
+      8    0.1%  100.0%  JavaScript
+      0    0.0%    0.0%  C++
+     25    0.4%  312.5%  GC
+   6479   99.9%          Shared libraries
+
+ [C++ entry points]:
+   ticks    cpp   total   name
+
+ [Bottom up (heavy) profile]:
+  Note: percentage shows a share of a particular caller in the total
+  amount of its parent calls.
+  Callers occupying less than 1.0% are not shown.
+
+   ticks parent  name
+   6223   95.9%  C:\WINDOWS\SYSTEM32\ntdll.dll
+
+    255    3.9%  C:\Program Files\nodejs\node.exe
+    153   60.0%    C:\Program Files\nodejs\node.exe
+     42   27.5%      LazyCompile: ~wrapSafe internal/modules/cjs/loader.js:964:18
+     40   95.2%        LazyCompile: ~Module._compile internal/modules/cjs/loader.js:1017:37
+     40  100.0%          LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1072:37
+     31   77.5%            LazyCompile: ~Module.load internal/modules/cjs/loader.js:916:33
+      9   22.5%            LazyCompile: *Module._load internal/modules/cjs/loader.js:704:24
+      2    4.8%        LazyCompile: *Module._compile internal/modules/cjs/loader.js:1017:37
+      2  100.0%          LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1072:37
+      2  100.0%            LazyCompile: *Module._load internal/modules/cjs/loader.js:704:24
+     23   15.0%      LazyCompile: ~realpathSync fs.js:1650:22
+     13   56.5%        LazyCompile: ~toRealPath internal/modules/cjs/loader.js:343:20
+     13  100.0%          LazyCompile: ~tryFile internal/modules/cjs/loader.js:334:17
+     13  100.0%            LazyCompile: ~tryExtensions internal/modules/cjs/loader.js:350:23
+     10   43.5%        LazyCompile: *Module._findPath internal/modules/cjs/loader.js:444:28
+     10  100.0%          LazyCompile: ~Module._resolveFilename internal/modules/cjs/loader.js:796:35
+      5   50.0%            LazyCompile: ~Module._load internal/modules/cjs/loader.js:704:24
+      5   50.0%            LazyCompile: *Module._load internal/modules/cjs/loader.js:704:24
+     17   11.1%      LazyCompile: ~handleWriteReq internal/stream_base_commons.js:47:24
+     17  100.0%        LazyCompile: ~writeGeneric internal/stream_base_commons.js:143:22
+     17  100.0%          LazyCompile: ~Socket._writeGeneric net.js:759:42
+     17  100.0%            LazyCompile: ~Socket._write net.js:796:35
+      6    3.9%      LazyCompile: ~openSync fs.js:467:18
+      6  100.0%        LazyCompile: ~readFileSync fs.js:374:22
+      6  100.0%          LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1072:37
+      6  100.0%            LazyCompile: ~Module.load internal/modules/cjs/loader.js:916:33
+      6    3.9%      LazyCompile: ~compileForInternalLoader internal/bootstrap/loaders.js:270:27
+      5   83.3%        LazyCompile: ~nativeModuleRequire internal/bootstrap/loaders.js:303:29
+      1   20.0%          LazyCompile: ~setupPrepareStackTrace internal/bootstrap/node.js:252:32
+      1  100.0%            Eval: ~<anonymous> internal/bootstrap/node.js:1:1
+      1   20.0%          Eval: ~<anonymous> stream.js:1:1
+      1  100.0%            LazyCompile: ~compileForInternalLoader internal/bootstrap/loaders.js:270:27
+      1   20.0%          Eval: ~<anonymous> internal/url.js:1:1
+      1  100.0%            LazyCompile: ~compileForInternalLoader internal/bootstrap/loaders.js:270:27
+      1   20.0%          Eval: ~<anonymous> http.js:1:1
+      1  100.0%            LazyCompile: ~compileForInternalLoader internal/bootstrap/loaders.js:270:27
+      1   20.0%          Eval: ~<anonymous> _tls_wrap.js:1:1
+      1  100.0%            LazyCompile: ~compileForInternalLoader internal/bootstrap/loaders.js:270:27
+      1   16.7%        LazyCompile: ~compileForPublicLoader internal/bootstrap/loaders.js:219:25
+      1  100.0%          LazyCompile: ~loadNativeModule internal/modules/cjs/helpers.js:31:26
+      1  100.0%            LazyCompile: ~Module._load internal/modules/cjs/loader.js:704:24
+      4    2.6%      LazyCompile: ~readSync fs.js:555:18
+      3   75.0%        LazyCompile: ~tryReadSync fs.js:362:21
+      3  100.0%          LazyCompile: ~readFileSync fs.js:374:22
+      3  100.0%            LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1072:37
+      1   25.0%        LazyCompile: *readFileSync fs.js:374:22
+      1  100.0%          LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1072:37
+      1  100.0%            LazyCompile: ~Module.load internal/modules/cjs/loader.js:916:33
+      4    2.6%      C:\Program Files\nodejs\node.exe
+      1   25.0%        LazyCompile: ~wrapSafe internal/modules/cjs/loader.js:964:18
+      1  100.0%          LazyCompile: ~Module._compile internal/modules/cjs/loader.js:1017:37
+      1  100.0%            LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1072:37
+      1   25.0%        LazyCompile: ~stat internal/modules/cjs/loader.js:132:14
+      1  100.0%          LazyCompile: ~Module._findPath internal/modules/cjs/loader.js:444:28
+      1  100.0%            LazyCompile: ~Module._resolveFilename internal/modules/cjs/loader.js:796:35
+      1   25.0%        LazyCompile: ~exports.sign C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\cookie-signature\index.js:16:24
+      1  100.0%          LazyCompile: ~setcookie C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\express-session\index.js:655:19
+      1  100.0%            LazyCompile: ~<anonymous> C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\express-session\index.js:220:28
+      1   25.0%        LazyCompile: *Module._findPath internal/modules/cjs/loader.js:444:28
+      1  100.0%          LazyCompile: ~Module._resolveFilename internal/modules/cjs/loader.js:796:35
+      1  100.0%            LazyCompile: ~Module._load internal/modules/cjs/loader.js:704:24
+      3    2.0%      LazyCompile: ~stat internal/modules/cjs/loader.js:132:14
+      3  100.0%        LazyCompile: ~tryFile internal/modules/cjs/loader.js:334:17
+      3  100.0%          LazyCompile: ~tryExtensions internal/modules/cjs/loader.js:350:23
+      2   66.7%            LazyCompile: ~Module._findPath internal/modules/cjs/loader.js:444:28
+      1   33.3%            LazyCompile: ~tryPackage internal/modules/cjs/loader.js:288:20
+      3    2.0%      LazyCompile: ~TLSSocket.getPeerCertificate _tls_wrap.js:972:50
+      3  100.0%        LazyCompile: ~onConnectSecure _tls_wrap.js:1483:25
+      3  100.0%          LazyCompile: ~emit events.js:264:44
+      3  100.0%            LazyCompile: ~TLSSocket._finishInit _tls_wrap.js:906:43
+      2    1.3%      LazyCompile: ~tryStatSync fs.js:337:21
+      2  100.0%        LazyCompile: ~readFileSync fs.js:374:22
+      2  100.0%          LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1072:37
+      2  100.0%            LazyCompile: ~Module.load internal/modules/cjs/loader.js:916:33
+      2    1.3%      LazyCompile: ~slice buffer.js:608:12
+      2  100.0%        LazyCompile: ~toString buffer.js:776:46
+      1   50.0%          LazyCompile: ~readFileSync fs.js:374:22
+      1  100.0%            LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1072:37
+      1   50.0%          LazyCompile: ~deserializeObject C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\deserializer.js:65:27
+      1  100.0%            LazyCompile: ~deserializeObject C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\deserializer.js:65:27
+      2    1.3%      LazyCompile: ~readPackage internal/modules/cjs/loader.js:240:21
+      2  100.0%        LazyCompile: ~resolveExports internal/modules/cjs/loader.js:422:24
+      2  100.0%          LazyCompile: ~Module._findPath internal/modules/cjs/loader.js:444:28
+      2  100.0%            LazyCompile: ~Module._resolveFilename internal/modules/cjs/loader.js:796:35
+      2    1.3%      LazyCompile: ~read internal/modules/package_json_reader.js:16:14
+      2  100.0%        LazyCompile: ~readPackage internal/modules/cjs/loader.js:240:21
+      1   50.0%          LazyCompile: ~tryPackage internal/modules/cjs/loader.js:288:20
+      1  100.0%            LazyCompile: *Module._findPath internal/modules/cjs/loader.js:444:28
+      1   50.0%          LazyCompile: ~resolveExports internal/modules/cjs/loader.js:422:24
+      1  100.0%            LazyCompile: ~Module._findPath internal/modules/cjs/loader.js:444:28
+      2    1.3%      LazyCompile: ~createSecureContext _tls_common.js:94:59
+      2  100.0%        LazyCompile: ~connect _tls_wrap.js:1556:35
+      2  100.0%          LazyCompile: ~makeConnection C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\cmap\connect.js:227:24
+      2  100.0%            LazyCompile: ~connect C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\cmap\connect.js:15:17
+      2    1.3%      LazyCompile: ~TLSSocket._start _tls_wrap.js:935:38
+      2  100.0%        LazyCompile: ~onceWrapper events.js:416:21
+      2  100.0%          LazyCompile: ~emit events.js:264:44
+      2  100.0%            LazyCompile: ~afterConnect net.js:1108:22
+      2    1.3%      LazyCompile: ~Long C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\long.js:58:18
+      2  100.0%        LazyCompile: ~deserializeObject C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\deserializer.js:65:27
+      1   50.0%          LazyCompile: ~deserializeObject C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\deserializer.js:65:27
+      1  100.0%            LazyCompile: ~deserialize C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\deserializer.js:36:21
+      1   50.0%          LazyCompile: ~deserialize C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\deserializer.js:36:21
+      1  100.0%            LazyCompile: ~deserialize C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\bson.js:162:21
+      2    1.3%      LazyCompile: *readPackageScope internal/modules/cjs/loader.js:271:26
+      2  100.0%        LazyCompile: ~trySelf internal/modules/cjs/loader.js:391:17
+      2  100.0%          LazyCompile: ~Module._resolveFilename internal/modules/cjs/loader.js:796:35
+      2  100.0%            LazyCompile: ~Module._load internal/modules/cjs/loader.js:704:24
+      3    1.2%    LazyCompile: ~serializeInto C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\serializer.js:550:23
+      2   66.7%      LazyCompile: ~serializeObject C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\serializer.js:258:25
+      2  100.0%        LazyCompile: ~serializeInto C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\serializer.js:550:23
+      1   50.0%          LazyCompile: ~serializeObject C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\serializer.js:258:25
+      1  100.0%            LazyCompile: ~serializeInto C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\parser\serializer.js:550:23
+      1   50.0%          LazyCompile: ~serialize C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\bson.js:111:19
+      1  100.0%            LazyCompile: ~serializeBson C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\cmap\commands.js:530:18
+      1   33.3%      LazyCompile: ~serialize C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\bson\lib\bson.js:111:19
+      1  100.0%        LazyCompile: ~serializeBson C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\cmap\commands.js:530:18
+      1  100.0%          LazyCompile: ~makeDocumentSegment C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\cmap\commands.js:522:24
+      1  100.0%            LazyCompile: ~toBin C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\mongodb\lib\cmap\commands.js:496:10
+      3    1.2%    LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1072:37
+      2   66.7%      LazyCompile: *Module._load internal/modules/cjs/loader.js:704:24
+      2  100.0%        LazyCompile: ~Module.require internal/modules/cjs/loader.js:944:36
+      2  100.0%          LazyCompile: ~require internal/modules/cjs/helpers.js:87:31
+      1   50.0%            Eval: ~<anonymous> C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\faker\lib\locales\tr\address\index.js:1:1
+      1   50.0%            Eval: ~<anonymous> C:\Users\Nicolas\Documents\DesafioWebSocket\node_modules\faker\lib\locales\ru\name\index.js:1:1
+      1   33.3%      LazyCompile: ~Module.load internal/modules/cjs/loader.js:916:33
+      1  100.0%        LazyCompile: ~Module._load internal/modules/cjs/loader.js:704:24
+      1  100.0%          LazyCompile: ~Module.require internal/modules/cjs/loader.js:944:36
+      1  100.0%            LazyCompile: ~require internal/modules/cjs/helpers.js:87:31
+      3    1.2%    LazyCompile: *Module._findPath internal/modules/cjs/loader.js:444:28
+      3  100.0%      LazyCompile: ~Module._resolveFilename internal/modules/cjs/loader.js:796:35
+      2   66.7%        LazyCompile: ~Module._load internal/modules/cjs/loader.js:704:24
+      2  100.0%          LazyCompile: ~Module.require internal/modules/cjs/loader.js:944:36
+      2  100.0%            LazyCompile: ~require internal/modules/cjs/helpers.js:87:31
+      1   33.3%        LazyCompile: *Module._load internal/modules/cjs/loader.js:704:24
+      1  100.0%          LazyCompile: ~Module.require internal/modules/cjs/loader.js:944:36
+      1  100.0%            LazyCompile: ~require internal/modules/cjs/helpers.js:87:31
+

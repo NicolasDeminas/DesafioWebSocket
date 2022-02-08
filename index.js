@@ -1,5 +1,5 @@
 const express = require("express");
-const compression = require('compression')
+const compression = require("compression");
 const app = express();
 const parseArg = require("minimist");
 const cluster = require("cluster");
@@ -38,7 +38,9 @@ if (clusterMode && cluster.isMaster) {
   const { userModel } = require("./db");
   const dotenv = require("dotenv");
   const { createHash } = require("crypto");
-  const {infoLogger, warningLogger, errorLogger} = require('./logger')
+  const { infoLogger, warningLogger, errorLogger } = require("./logger");
+
+  const PORT = arguments.port || process.env.PORT;
 
   const io = require("socket.io")(server);
 
@@ -75,7 +77,7 @@ if (clusterMode && cluster.isMaster) {
   app.use(express.json());
   app.use(express.urlencoded());
 
-  app.use(compression())
+  app.use(compression());
 
   app.use(
     session({
@@ -265,7 +267,7 @@ if (clusterMode && cluster.isMaster) {
 
   app.use(express.static(__dirname + "/public/"));
 
-  server.listen(arguments.port, () => {
-    console.log(`Server run on port ${arguments.port}`);
+  server.listen(PORT, () => {
+    console.log(`Server run on port ${PORT}`);
   });
 }

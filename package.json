@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "autocannon index.js",
-    "start": "node index.js",
+    "start": "node .",
     "dev": "nodemon index.js"
   },
   "keywords": [],

@@ -87,4 +87,4 @@ const userSchema = new Schema({
 
 const userModel = model("user", userSchema);
 
-module.exports = { knex, messageModel, userModel };
+module.exports = { messageModel, userModel };

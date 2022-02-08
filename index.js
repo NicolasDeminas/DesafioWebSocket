@@ -40,7 +40,7 @@ if (clusterMode && cluster.isMaster) {
   const { createHash } = require("crypto");
   const { infoLogger, warningLogger, errorLogger } = require("./logger");
 
-  const PORT = arguments.port || process.env.PORT;
+  const PORT = process.env.PORT || 8080;
 
   const io = require("socket.io")(server);
 

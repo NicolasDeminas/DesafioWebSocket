@@ -14,9 +14,10 @@ log4js.configure({
   },
 });
 
-const infoLogger = log4js.getLogger('consola')
-const warningLogger = log4js.getLogger('warning')
-const errorLogger = log4js.getLogger('errors')
+const infoLogger = log4js.getLogger("consola");
+const warningLogger = log4js.getLogger("warning");
+const errorLogger = log4js.getLogger("errors");
 
+infoLogger.trace(`hola mundo`);
 
-module.exports = {infoLogger, warningLogger, errorLogger}
+module.exports = { infoLogger, warningLogger, errorLogger };

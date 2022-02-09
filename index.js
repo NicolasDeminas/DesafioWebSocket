@@ -100,6 +100,21 @@ if (clusterMode && cluster.isMaster) {
     res.redirect("/login");
   };
 
+  app.use((req, res, next) => {
+    let ruta = req.originalUrl;
+    let metodo = req.method;
+
+    infoLogger.info(`Ruta: ${ruta} \n Metodo: ${metodo}`);
+    next();
+  });
+
+  const infolog = (req, res) => {
+    let ruta = req.originalUrl;
+    let metodo = req.method;
+
+    infoLogger.trace(`Ruta: ${ruta} \n Metodo: ${metodo}`);
+  };
+
   //PASSPORT
   app.use(passport.initialize());
   app.use(passport.session());
@@ -233,22 +248,38 @@ if (clusterMode && cluster.isMaster) {
   );
 
   app.get("/logout", (req, res) => {
-    req.logOut();
-    res.redirect("/login");
+    try {
+      req.logOut();
+      res.redirect("/login");
+    } catch (err) {
+      errorLogger.error(err);
+    }
   });
 
   app.put("/updateProduct/:id", async (req, res) => {
-    await c.update(req.params.id, req.body);
-    res.send(`Producto id=${req.params.id} actualizado con exito`);
+    try {
+      await c.update(req.params.id, req.body);
+      res.send(`Producto id=${req.params.id} actualizado con exito`);
+    } catch (err) {
+      errorLogger.error(err);
+    }
   });
 
   app.delete("/deleteProduct/:id", async (req, res) => {
-    await c.delete(req.params.id);
-    res.send(`Producto id=${req.params.id} eliminado con exito`);
+    try {
+      await c.delete(req.params.id);
+      res.send(`Producto id=${req.params.id} eliminado con exito`);
+    } catch (err) {
+      errorLogger.error(err);
+    }
   });
 
   app.get("/api/productos-test", async (req, res) => {
-    res.send(await c.getFakerProducts());
+    try {
+      res.send(await c.getFakerProducts());
+    } catch (err) {
+      errorLogger.error(err);
+    }
   });
 
   app.get("/info", (req, res) => {
@@ -266,6 +297,14 @@ if (clusterMode && cluster.isMaster) {
   });
 
   app.use(express.static(__dirname + "/public/"));
+
+  app.use("*", (req, res) => {
+    let ruta = req.originalUrl;
+    let metodo = req.method;
+
+    warningLogger.warn(`Ruta ${ruta} metodo ${metodo} no implementados`);
+    res.send(`Ruta no implementada`);
+  });
 
   server.listen(PORT, () => {
     console.log(`Server run on port ${PORT}`);

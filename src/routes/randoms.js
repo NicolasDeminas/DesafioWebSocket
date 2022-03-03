@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
   const dependencies = { message: repeticiones };
   const args = [JSON.stringify(dependencies)];
 
-  const comp = fork("./routes/generateRandomNumbers.js", args);
+  const comp = fork("../controllers/generateRandomeNumbers.js", args);
   comp.send("generateRandomNumber");
 
   comp.on("message", (data) => {

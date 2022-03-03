@@ -47,9 +47,8 @@ dotenv.config();
 //   });
 
 const mongoose = require("mongoose");
-const { Schema, model } = require("mongoose");
 
-mongoose.connect(process.env.MONGO_CONNECT);
+const connection = mongoose.connect(process.env.MONGO_CONNECT);
 
 mongoose.connection.on("open", () => {
   console.log("Base de datos conectada con exito");
@@ -59,32 +58,5 @@ mongoose.connection.on("error", () => {
   console.log("Error al conectarse a la base de datos");
 });
 
-const messageSchema = new Schema({
-  author: {
-    id: String,
-    nombre: String,
-    apellido: String,
-    edad: Number,
-    alias: String,
-    avatar: String,
-  },
+module.exports = connection
 
-  text: { type: String, required: true },
-});
-
-const messageModel = model("message", messageSchema);
-
-const userSchema = new Schema({
-  username: {
-    type: String,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-});
-
-const userModel = model("user", userSchema);
-
-module.exports = { messageModel, userModel };

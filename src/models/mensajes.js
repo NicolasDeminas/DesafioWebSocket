@@ -22,7 +22,7 @@
 //   }
 // }
 
-const { messageModel } = require("./db");
+const { messageModel } = require("../config/db");
 
 class Mensajes {
   constructor() {}
